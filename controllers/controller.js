@@ -5,15 +5,16 @@ var path = require('path');
 var request = require("request");
 var cheerio = require("cheerio");
 
+
 router.get('/', function(req, res){
-  res.render('index');
+  	res.render('index');
 });
 
 router.get('/scrape', function(req,res){
 	request("https://www.reddit.com/r/webdev", function(error, response, html) {
-	  var $ = cheerio.load(html);
+	  	var $ = cheerio.load(html);
+	  	var results = [];
 
-	  var results = [];
 	  	$("p.title").each(function(i, element) {
 		    var title = $(element).text();
 		    var link = $(element).children().attr("href");
@@ -23,7 +24,18 @@ router.get('/scrape', function(req,res){
 		      	link: link
 		    	});
 	  	});
-	  console.log(results);
+
+      	db.Headline.create(results)
+        .then(function(dbHeadlines) {
+        })
+        .catch(function(err) {
+          return res.json(err);
+        });
 	});
+	console.log("Scrape Complete")
 });
+
+
+
+
 module.exports = router;

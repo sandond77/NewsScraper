@@ -1,17 +1,15 @@
 var express = require("express");
 var bodyParser = require("body-parser");
-var mongoose = require("mongoose");
-var request = require("request");
 var path = require('path');
-var port = process.env.PORT || 3000;
-// var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
 
-// // Set mongoose to leverage built in JavaScript ES6 Promises
-// // Connect to the Mongo DB
-// mongoose.Promise = Promise;
-// mongoose.connect(MONGODB_URI, {
-//   useMongoClient: true
-// });
+var port = process.env.PORT || 3000;
+
+var mongoose = require("mongoose");
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
+mongoose.Promise = Promise;
+mongoose.connect(MONGODB_URI, {
+  useMongoClient: true
+});
 
 var app = express();
 
