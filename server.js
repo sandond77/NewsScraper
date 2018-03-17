@@ -3,16 +3,16 @@ var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
 var cheerio = require("cheerio");
 var request = require("request");
-
+var path = require('path');
 var port = process.env.PORT || 3000;
-var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
+// var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
 
-// Set mongoose to leverage built in JavaScript ES6 Promises
-// Connect to the Mongo DB
-mongoose.Promise = Promise;
-mongoose.connect(MONGODB_URI, {
-  useMongoClient: true
-});
+// // Set mongoose to leverage built in JavaScript ES6 Promises
+// // Connect to the Mongo DB
+// mongoose.Promise = Promise;
+// mongoose.connect(MONGODB_URI, {
+//   useMongoClient: true
+// });
 
 // Require all models
 var db = require("./models");
@@ -28,16 +28,17 @@ app.use(bodyParser.json());
 
 var exphbs = require('express-handlebars');
 app.engine('handlebars', exphbs({ 
-	defaultLayout: 'main',
-	layoutsDir: path.join(__dirname, 'views')
+	defaultLayout: 'index',
+	layoutsDir: path.join(__dirname, 'home')
  }));
 app.set('view engine', 'handlebars');
 
 
 // Import routes and give the server access to them
-var routes = require('./controllers/controller.js');
-app.use(routes);
+// var routes = require('./controllers/controller.js');
+// app.use(routes);
 
 app.listen(port, function(){
 	console.log("App now listening at localhost:" + port);
 });
+
