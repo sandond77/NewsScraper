@@ -11,7 +11,7 @@ router.get('/', function(req, res){
 });
 
 router.get('/scrape', function(req,res){
-	request("https://www.reddit.com/r/webdev", function(error, response, html) {
+	request("https://www.reddit.com/r/news/", function(error, response, html) {
 	  	var $ = cheerio.load(html);
 	  	var results = [];
 
