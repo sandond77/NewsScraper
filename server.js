@@ -1,7 +1,6 @@
 var express = require("express");
 var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
-var cheerio = require("cheerio");
 var request = require("request");
 var path = require('path');
 var port = process.env.PORT || 3000;
@@ -14,14 +13,8 @@ var port = process.env.PORT || 3000;
 //   useMongoClient: true
 // });
 
-// Require all models
-var db = require("./models");
-
-// Initialize Express
 var app = express();
 
-// Serve static content for the app from the 'public' directory
-// app.use('public', express.static(path.join(__dirname, '/public')));
 app.use(express.static("public"));
 
 app.use(bodyParser.urlencoded({ extended: true}));
