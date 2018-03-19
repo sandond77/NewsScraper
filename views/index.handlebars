@@ -13,8 +13,8 @@
 
 		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
 		      	<ul class="nav navbar-nav">
-		        	<li class="active"><a href="#">Home <span class="sr-only">(current)</span></a></li>
-		        	<li><a href="#">Saved Articles</a></li>
+		        	<li class="active"><a href="/">Home <span class="sr-only">(current)</span></a></li>
+		        	<li><a href="/saved">Saved Articles</a></li>
 		      	</ul>
 
 		      	<ul class="nav navbar-nav navbar-right">
@@ -33,7 +33,8 @@
       	{{#each results}}
 	      	<div class="panel panel-primary">
 			  	<div class="panel-heading">
-			    	<h3 class="panel-title">{{title}}</h3>
+			    	<h1 class="panel-title">{{title}}</h1>
+		    		<a class="btn btn-danger pull-right save" data-id="{{_id}}">Save Article</a>
 			  	</div>
 			  	<div class="panel-body">
 			    	<a href="{{link}}">{{link}}</a>
@@ -42,3 +43,34 @@
       	{{/each}}
 	</div>
 </div>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script>
+	$(document).ready(function(){
+		$(".save").click(function(event){
+			event.preventDefault();
+			var send = {
+				id:
+				$(this).attr("data-id")
+			}
+			console.log("id: ", send)
+			console.log("saved button clicked")
+
+			$.ajax({
+				method: "PUT",
+				url: "/save",
+				data: send
+			}).then(function(data){
+				if(data.ok){
+					console.log("Saved an article!");
+				}
+			});
+		})
+	})
+</script>
+
+
+
+	
+
+

@@ -14,6 +14,30 @@ router.get('/', function(req, res){
 		})
 });
 
+router.get('/saved', function(req, res){
+	db.Headline.find({}).
+		then(function(results){
+			res.render('saved',{results});
+		})
+});
+
+router.put('/save',function(req,res){
+	console.log("ajax sent")
+	console.log(req.body.id)
+	db.Headline.findByIdAndUpdate(
+	{ 
+     	_id: req.body.id
+    },
+    {
+        $set: { 
+    		saved: true
+    	}
+    }).then(function(){
+    	console.log("Update complete")
+    });
+})
+
+
 router.get('/scrape', function(req,res){
 	request("https://www.reddit.com/r/news/", function(error, response, html) {
 	  	var $ = cheerio.load(html);
