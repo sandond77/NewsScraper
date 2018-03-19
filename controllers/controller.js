@@ -76,24 +76,36 @@ router.get('/api/scrape', function(req,res){
 	    	});
 	  	});
 
-	  	res.json(results)
+	  	for (var i = 0; i < results.length; i++) {
+	  		db.Headline.update(
+		  		{
+		  			link: results[i].link
+		  		},
+		  		{
+		  			$set:{
+		  				title: results[i].title,
+		  				link: results[i].link,
+		  			}
+		  		},
+		  		{
+		  			upsert: true,
+		  			setDefaultsOnInsert: true
+		  		}
+	  		).catch(function(err) {
+         		 return res.json(err);
+        	});
+	  	}
 
 
 
-
-
-      	db.Headline.create(results)
-        .then(function(dbHeadlines) {
-        	console.log("Scrape Complete")
-        })
-        .catch(function(err) {
-          return res.json(err);
-        });
+      	// db.Headline.create(results)
+       //  .then(function(dbHeadlines) {
+       //  	console.log("Scrape Complete")
+       //  })
+        // .catch(function(err) {
+        //   return res.json(err);
+        // });
 	});
 });
-
-
-
-
 
 module.exports = router;
