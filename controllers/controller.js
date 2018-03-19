@@ -21,6 +21,14 @@ router.get('/saved', function(req, res){
 		})
 });
 
+router.get('/api', function(req, res){
+	db.Headline.find({}).
+		then(function(results){
+			res.json(results);
+		})
+});
+
+
 router.put('/save',function(req,res){
 	console.log("ajax sent")
 	console.log(req.body.id)
@@ -53,8 +61,7 @@ router.put('/remove',function(req,res){
     });
 })
 
-
-router.get('/scrape', function(req,res){
+router.get('/api/scrape', function(req,res){
 	request("https://www.reddit.com/r/news/", function(error, response, html) {
 	  	var $ = cheerio.load(html);
 	  	var results = [];
@@ -70,6 +77,10 @@ router.get('/scrape', function(req,res){
 	  	});
 
 	  	res.json(results)
+
+
+
+
 
       	db.Headline.create(results)
         .then(function(dbHeadlines) {

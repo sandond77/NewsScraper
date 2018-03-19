@@ -46,7 +46,7 @@
 
 			$.ajax({
 				method: "GET",
-				url: "/scrape",
+				url: "/api/scrape",
 			}).then(function(){
 				console.log("scraping complete!");
 			});
@@ -65,6 +65,7 @@
 				url: "/save",
 				data: send
 			}).then(function(){
+				window.location.reload();
 				console.log("article save complete!");
 			});
 		})
