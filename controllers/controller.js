@@ -7,7 +7,11 @@ var cheerio = require("cheerio");
 
 
 router.get('/', function(req, res){
-  	res.render('index');
+	db.Headline.find({}).
+		then(function(results){
+			res.render('index',{results});
+			// res.json(dbHeadlines);
+		})
 });
 
 router.get('/scrape', function(req,res){
@@ -25,14 +29,16 @@ router.get('/scrape', function(req,res){
 		    	});
 	  	});
 
+	  	res.json(results)
+
       	db.Headline.create(results)
         .then(function(dbHeadlines) {
+        	console.log("Scrape Complete")
         })
         .catch(function(err) {
           return res.json(err);
         });
 	});
-	console.log("Scrape Complete")
 });
 
 
