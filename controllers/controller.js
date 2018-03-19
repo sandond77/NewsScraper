@@ -53,6 +53,7 @@ router.put('/remove',function(req,res){
     });
 })
 
+
 router.get('/scrape', function(req,res){
 	request("https://www.reddit.com/r/news/", function(error, response, html) {
 	  	var $ = cheerio.load(html);
@@ -65,7 +66,7 @@ router.get('/scrape', function(req,res){
 			results.push({
 		      	title: title,
 		      	link: link
-		    	});
+	    	});
 	  	});
 
 	  	res.json(results)
@@ -79,6 +80,7 @@ router.get('/scrape', function(req,res){
         });
 	});
 });
+
 
 
 
