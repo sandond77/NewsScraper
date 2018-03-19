@@ -33,10 +33,25 @@ router.put('/save',function(req,res){
     		saved: true
     	}
     }).then(function(){
-    	console.log("Update complete")
+    	console.log("Save complete")
     });
 })
 
+router.put('/remove',function(req,res){
+	console.log("ajax sent")
+	console.log(req.body.id)
+	db.Headline.findByIdAndUpdate(
+	{ 
+     	_id: req.body.id
+    },
+    {
+        $set: { 
+    		saved: false
+    	}
+    }).then(function(){
+    	res.send("Removal complete")
+    });
+})
 
 router.get('/scrape', function(req,res){
 	request("https://www.reddit.com/r/news/", function(error, response, html) {

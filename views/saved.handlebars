@@ -13,13 +13,9 @@
 
 		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
 		      	<ul class="nav navbar-nav">
-		        	<li class="active"><a href="/">Home <span class="sr-only">(current)</span></a></li>
-		        	<li><a href="/saved">Saved Articles</a></li>
+		        	<li class="active"><a href="/">Home</a></li>
+		        	<li><a href="/saved">Saved Articles<span class="sr-only">(current)</span></a></li>
 		      	</ul>
-
-		      	<ul class="nav navbar-nav navbar-right">
-	        		<li><a href="#" class="btn btn-danger btn-lg">Scrape New Articles!</a></li>
-	      		</ul>
 		    </div>
 	  	</div>
 	</nav>
@@ -35,6 +31,7 @@
 	      	<div class="panel panel-primary">
 			  	<div class="panel-heading">
 			    	<h3 class="panel-title">{{title}}</h3>
+			    	<a class="btn btn-danger pull-right remove" data-id="{{_id}}">Remove Article</a>
 			  	</div>
 			  	<div class="panel-body">
 			    	<a href="{{link}}">{{link}}</a>
@@ -44,3 +41,27 @@
       	{{/each}}
 	</div>
 </div>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script>
+	$(document).ready(function(){
+		$(".remove").click(function(event){
+			event.preventDefault();
+			var send = {
+				id:
+				$(this).attr("data-id")
+			}
+			console.log("id: ", send)
+			console.log("delete button clicked")
+
+			$.ajax({
+				method: "PUT",
+				url: "/remove",
+				data: send
+			}).then(function(data){
+				window.location.reload();
+			});
+		})
+	})
+</script>
