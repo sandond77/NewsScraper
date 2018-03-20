@@ -20,6 +20,7 @@
 		<div class="center-block">
 				<a class="btn btn-danger btn-lg scrape">Scrape New Articles!</a>
 		</div>
+		<p> NOTE: It may take a few seconds for the scraping to finish. </p>
 	</div>
 
 	<div class="articles">
@@ -55,6 +56,8 @@
 
 		$(".save").click(function(event){
 			event.preventDefault();
+			// $(this).val() = "Article Saved!";
+			$(this).html('Saved!');
 			var send = {
 				id: $(this).attr("data-id")
 			}
