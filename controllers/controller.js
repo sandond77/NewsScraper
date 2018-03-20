@@ -77,6 +77,8 @@ router.get('/api/scrape', function(req,res){
 	    	});
 	  	});
 
+	  	results = results.reverse();
+
 	  	for (var i = 0; i < results.length; i++) {
 	  		db.Headline.update(
 		  		{
