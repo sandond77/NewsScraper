@@ -100,4 +100,37 @@ router.get('/api/scrape', function(req,res){
 	});
 });
 
+router.get("/api/articles", function(req, res) {
+    db.Headline.findOne(
+    { 
+      _id: req.body.id
+    }
+    ).populate("note")
+    .then(function(dbArticle){
+      res.json(dbArticle);
+    })
+});
+
+router.post("/api/articles", function(req,res){
+  	db.Note.create(req.body)
+	  	.then(function(dbNote) {
+	    	db.User.findOneAndUpdate(
+	    		{
+	    			_id: req.params.id
+	    		}, 
+	    		{
+	    			notes: dbNote._id 
+	    		}, 
+	    		{ 
+	    			new: true 
+	    		});
+	  	}).then(function(dbArticle) {
+	    res.json(dbArticle);
+	  })
+	  .catch(function(err) {
+	    res.json(err);
+	  });
+});
+
+
 module.exports = router;
