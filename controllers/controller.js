@@ -9,6 +9,7 @@ var cheerio = require("cheerio");
 router.get('/', function(req, res){
 	db.Headline.find({}).
 		then(function(results){
+			results = results.reverse();
 			res.render('index',{results});
 			// res.json(dbHeadlines);
 		})
