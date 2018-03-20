@@ -100,42 +100,44 @@ router.get('/api/scrape', function(req,res){
 	});
 });
 
-router.get("/comments", function(req, res) {
+router.get("/api/:id", function(req, res) {
 	console.log("get received")
-    db.Note.findOne(
-	    { 
-	      _id: req.body.id
-	    }
-    ).then(function(results){
-     	// res.render('index',{results});
-     	res.send(results);
-    })	  	
-    	.catch(function(err) {
-	    	res.json(err);
-	  	});
+    // db.Note.findOne(
+	   //  { 
+	   //    _id: req.body.id
+	   //  }
+    // ).then(function(results){
+    //  	// res.render('index',{resapi
+    //  	res.send(results);
+    // })	  	
+    // 	.catch(function(err) {
+	   //  	res.json(err);
+	  	// });
+	res.send("test response")
 });
 
-router.post("/comment", function(req,res){
+router.post("/api/:id", function(req,res){
 	console.log("post received")
-  	db.Note.create(req.body.note)
-	  	.then(function(dbNote) {
-	    	db.User.findOneAndUpdate(
-	    		{
-	    			_id: req.body.id
-	    		}, 
-	    		{
-	    			notes: dbNote._id 
-	    		}, 
-	    		{ 
-	    			new: true 
-	    		});
-	  	}).then(function(response) {
-	  	console.log("db updated")
-	    res.json(response);
-	  })
-	  .catch(function(err) {
-	    res.json(err);
-	  });
+  	// db.Note.create(req.body.note)
+	  // 	.then(function(dbNote) {
+	  //   	db.User.findOneAndUpdate(
+	  //   		{
+	  //   			_id: req.body.id
+	  //   		}, 
+	  //   		{
+	  //   			notes: dbNote._id 
+	  //   		}, 
+	  //   		{ 
+	  //   			new: true 
+	  //   		});
+	  // 	}).then(function(response) {
+	  // 	console.log("db updated")
+	  //   res.json(response);
+	  // })
+	  // .catch(function(err) {
+	  //   res.json(err);
+	  // });
+	  res.send("test response")
 });
 
 

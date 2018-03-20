@@ -101,14 +101,14 @@
 			event.preventDefault();
 			$(".modal").modal()
 
-			var send = {
-				id:$(this).attr("data-id")
-			}
+			var id = $(this).attr("data-id");
 
 			$.ajax({
 				method: "GET",
-				url: "/article",
-				data: send
+				url: "/api/" + id,
+				data: {
+					id: id
+				}
 			}).then(function(response){
 				console.log("comments found!", response);
 			});
@@ -121,9 +121,11 @@
 				note:$("#text").val().trim()
 			}
 
+			var id = $(this).attr("data-id");
+
 			$.ajax({
 				method: "POST",
-				url: "/article",
+				url: "/api/" + id,
 				data: send
 			}).then(function(response){
 				console.log("comment saved!");
