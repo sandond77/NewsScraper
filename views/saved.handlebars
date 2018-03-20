@@ -26,6 +26,7 @@
 			  	<div class="panel-heading">
 			    	<h3 class="panel-title">{{title}}</h3>
 			    	<a class="btn btn-danger pull-right remove" data-id="{{_id}}">Remove Article</a>
+			    	<a class="btn btn-success pull-right comments" data-id="{{_id}}">Comments</a>
 			  	</div>
 			  	<div class="panel-body">
 			    	<a href="{{link}}">{{link}}</a>
@@ -33,6 +34,24 @@
 			</div>
 			{{/if}}
       	{{/each}}
+	</div>
+
+	<div class="modal">
+	  	<div class="modal-dialog">
+	    	<div class="modal-content">
+		      	<div class="modal-header">
+		        	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		        	<h4 class="modal-title">Modal title</h4>
+		      	</div>
+		      	<div class="modal-body">
+		        	<p>One fine body…</p>
+		      	</div>
+		      	<div class="modal-footer">
+		        	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		        	<button type="button" class="btn btn-primary">Save changes</button>
+		      	</div>
+	    	</div>
+	  	</div>
 	</div>
 </div>
 
@@ -56,6 +75,11 @@
 			}).then(function(data){
 				window.location.reload();
 			});
+		})
+
+		$(".comments").click(function(event){
+			event.preventDefault();
+			$(".modal").modal()
 		})
 	})
 </script>

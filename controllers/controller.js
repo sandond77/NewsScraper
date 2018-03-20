@@ -97,16 +97,6 @@ router.get('/api/scrape', function(req,res){
         	});
 	  	}
 	  	res.send("database updated")
-
-
-
-      	// db.Headline.create(results)
-       //  	.then(function(dbResponse) {
-       //  		console.log("saved to db")
-       //  	})
-       //  	.catch(function(err) {
-       //   	 return res.json(err);
-       //  	});
 	});
 });
 
