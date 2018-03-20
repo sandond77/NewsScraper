@@ -107,8 +107,8 @@ router.get("/api/:id", function(req, res) {
 	      _id: req.params.id
 	    }
     ).then(function(results){
-     	// res.render('saved',{results});
-     	res.json(results);
+     	res.render('saved',{results});
+     	// res.json(results);
     })	  	
     	.catch(function(err) {
 	    	res.json(err);
@@ -118,7 +118,8 @@ router.get("/api/:id", function(req, res) {
 
 router.post("/api/:id", function(req,res){
 	console.log("post received")
-  	db.Note.create(req.body.note)
+	console.log("req.body",req.body)
+  	db.Note.create(req.body)
 	  	.then(function(dbNote) {
 	    	db.User.findOneAndUpdate(
 	    		{

@@ -48,13 +48,11 @@
 					    <div class="col s12">
 					      	<div class="comments">
 					        <ol class="list-group">
-{{!-- 					          	{{#each results}}
+					          	{{#each results}}
 						            <div>
-							            <li><p>{{note}}</p>
-							            <p> This comment was created on {{createdAt}} </p>
-							            </li>
+							            <li><p>{{note}}</p></li>
 						        	</div>
-					          	{{/each}} --}}
+					          	{{/each}}
 					      	</ol>
 					      </div>
 					    </div>
@@ -110,30 +108,42 @@
 					id: id
 				}
 			}).then(function(response){
-				console.log("console logging", response);
+				console.log("console logging);
 				// window.location.reload();
 			});
+
+			$(".submit").click(function(event){
+				event.preventDefault();
+				$("#text").val("");
+
+				$.ajax({
+					method: "POST",
+					url: "/api/" + id,
+					data: {
+						body: $("#text").val().trim()
+					}
+				}).then(function(response){
+					console.log("comment saved!");
+					// window.location.reload();
+				});
+			})
 		})
 
-		$(".submit").click(function(event){
-			event.preventDefault();
-			$("#text").val("");
-			var send = {
-				note:$("#text").val().trim()
-			}
+		// $(".submit").click(function(event){
+		// 	event.preventDefault();
+		// 	$("#text").val("");
+		// 	var id = $(this).attr("data-id");
 
-			var id = $(this).attr("data-id");
-
-			$.ajax({
-				method: "POST",
-				url: "/api/" + id,
-				data: {
-					note: $("#text").val().trim()
-				}
-			}).then(function(response){
-				console.log("comment saved!");
-				// window.location.reload();
-			});
-		})
+		// 	$.ajax({
+		// 		method: "POST",
+		// 		url: "/api/" + id,
+		// 		data: {
+		// 			body: $("#text").val().trim()
+		// 		}
+		// 	}).then(function(response){
+		// 		console.log("comment saved!");
+		// 		// window.location.reload();
+		// 	});
+		// })
 	})
 </script>
