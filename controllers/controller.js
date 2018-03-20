@@ -102,13 +102,13 @@ router.get('/api/scrape', function(req,res){
 
 router.get("/api/:id", function(req, res) {
 	console.log("get received")
-    db.Note.findOne(
+    db.Headline.findOne(
 	    { 
 	      _id: req.params.id
 	    }
     ).then(function(results){
      	res.render('saved',{results});
-     	// res.json(results);
+     	// res.send(results)
     })	  	
     	.catch(function(err) {
 	    	res.json(err);
