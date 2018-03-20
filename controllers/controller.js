@@ -95,16 +95,17 @@ router.get('/api/scrape', function(req,res){
          		 return res.json(err);
         	});
 	  	}
+	  	res.send("database updated")
 
 
 
       	// db.Headline.create(results)
-       //  .then(function(dbHeadlines) {
-       //  	console.log("Scrape Complete")
-       //  })
-        // .catch(function(err) {
-        //   return res.json(err);
-        // });
+       //  	.then(function(dbResponse) {
+       //  		console.log("saved to db")
+       //  	})
+       //  	.catch(function(err) {
+       //   	 return res.json(err);
+       //  	});
 	});
 });
 

@@ -46,10 +46,9 @@
 
 			$.ajax({
 				method: "GET",
-				url: "/api/scrape",
-			}).then(function(){
-				console.log("scraping complete!");
-				window.location.reload();
+				url: "/api/scrape"
+			}).then(function(response){
+				console.log("scraping complete");
 			});
 		})
 
