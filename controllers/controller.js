@@ -106,10 +106,10 @@ router.get("/api/:id", function(req, res) {
 	    { 
 	      _id: req.params.id
 	    }
-    ).then(function(results){
-     	res.render('saved',{results});
-     	// res.send(results)
-    })	  	
+    ).populate("note")
+    	.then(function(results){
+     		console.log("get request successful")
+    	})	  	
     	.catch(function(err) {
 	    	res.json(err);
 	  	});
@@ -120,18 +120,9 @@ router.post("/api/:id", function(req,res){
 	console.log("post received")
 	console.log("req.body",req.body)
   	db.Note.create(req.body)
-	  	.then(function(dbNote) {
-	    	db.User.findOneAndUpdate(
-	    		{
-	    			_id: req.params.id
-	    		}, 
-	    		{
-	    			notes: dbNote._id 
-	    		}, 
-	    		{ 
-	    			new: true 
-	    		});
-	  	}).then(function(response) {
+	    .then(function(dbNote) {
+      		return  db.User.findOneAndUpdate({_id: req.params.id}, {notes: dbNote._id }, { new: true });
+	    }).then(function(response) {
 	  	console.log("db updated")
 	    res.json(response);
 	  })
