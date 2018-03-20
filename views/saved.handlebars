@@ -38,12 +38,27 @@
 
 	<div class="modal">
 	  	<div class="modal-dialog">
-	    	<div class="modal-content">
+	    	<div class="modal-content text-center">
 		      	<div class="modal-header">
 		        	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 		        	<h4 class="modal-title">Comments</h4>
 		      	</div>
 		      	<div class="modal-body" id="note">
+		      		<div class="row">
+					    <div class="col s12">
+					      	<div class="comments">
+					        <ol class="list-group">
+{{!-- 					          	{{#each Message}}
+						            <div>
+							            <li><p>{{Message}}</p>
+							            <p> This comment was created on {{createdAt}} </p>
+							            </li>
+						        	</div>
+					          	{{/each}} --}}
+					      	</ol>
+					      </div>
+					    </div>
+				  	</div>
 		      	</div>
 		      	<div class="modal-footer">
 		      		<div class="form-group">
@@ -53,7 +68,7 @@
 				      	</div>
 				    </div>
 		        	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-		        	<button type="button" class="btn btn-primary">Submit</button>
+		        	<button type="button" class="btn btn-primary submit">Submit</button>
 		      	</div>
 	    	</div>
 	  	</div>
@@ -92,12 +107,27 @@
 
 			$.ajax({
 				method: "GET",
-				url: "/api/article",
+				url: "/article",
 				data: send
 			}).then(function(response){
-				console.log("comments found!");
+				console.log("comments found!", response);
 			});
+		})
 
+		$(".submit").click(function(event){
+			event.preventDefault();
+			var send = {
+				id:$(this).attr("data-id"),
+				note:$("#text").val().trim()
+			}
+
+			$.ajax({
+				method: "POST",
+				url: "/article",
+				data: send
+			}).then(function(response){
+				console.log("comment saved!");
+			});
 		})
 	})
 </script>

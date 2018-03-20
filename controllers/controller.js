@@ -100,23 +100,28 @@ router.get('/api/scrape', function(req,res){
 	});
 });
 
-router.get("/api/articles", function(req, res) {
-    db.Headline.findOne(
-    { 
-      _id: req.body.id
-    }
-    ).populate("note")
-    .then(function(dbArticle){
-      res.json(dbArticle);
-    })
+router.get("/comments", function(req, res) {
+	console.log("get received")
+    db.Note.findOne(
+	    { 
+	      _id: req.body.id
+	    }
+    ).then(function(results){
+     	// res.render('index',{results});
+     	res.send(results);
+    })	  	
+    	.catch(function(err) {
+	    	res.json(err);
+	  	});
 });
 
-router.post("/api/articles", function(req,res){
-  	db.Note.create(req.body)
+router.post("/comment", function(req,res){
+	console.log("post received")
+  	db.Note.create(req.body.note)
 	  	.then(function(dbNote) {
 	    	db.User.findOneAndUpdate(
 	    		{
-	    			_id: req.params.id
+	    			_id: req.body.id
 	    		}, 
 	    		{
 	    			notes: dbNote._id 
@@ -124,8 +129,9 @@ router.post("/api/articles", function(req,res){
 	    		{ 
 	    			new: true 
 	    		});
-	  	}).then(function(dbArticle) {
-	    res.json(dbArticle);
+	  	}).then(function(response) {
+	  	console.log("db updated")
+	    res.json(response);
 	  })
 	  .catch(function(err) {
 	    res.json(err);
