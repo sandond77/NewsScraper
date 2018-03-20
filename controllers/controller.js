@@ -102,42 +102,41 @@ router.get('/api/scrape', function(req,res){
 
 router.get("/api/:id", function(req, res) {
 	console.log("get received")
-    // db.Note.findOne(
-	   //  { 
-	   //    _id: req.body.id
-	   //  }
-    // ).then(function(results){
-    //  	// res.render('index',{resapi
-    //  	res.send(results);
-    // })	  	
-    // 	.catch(function(err) {
-	   //  	res.json(err);
-	  	// });
-	res.send("test response")
+    db.Note.findOne(
+	    { 
+	      _id: req.params.id
+	    }
+    ).then(function(results){
+     	// res.render('saved',{results});
+     	res.json(results);
+    })	  	
+    	.catch(function(err) {
+	    	res.json(err);
+	  	});
+	// res.send("test response")
 });
 
 router.post("/api/:id", function(req,res){
 	console.log("post received")
-  	// db.Note.create(req.body.note)
-	  // 	.then(function(dbNote) {
-	  //   	db.User.findOneAndUpdate(
-	  //   		{
-	  //   			_id: req.body.id
-	  //   		}, 
-	  //   		{
-	  //   			notes: dbNote._id 
-	  //   		}, 
-	  //   		{ 
-	  //   			new: true 
-	  //   		});
-	  // 	}).then(function(response) {
-	  // 	console.log("db updated")
-	  //   res.json(response);
-	  // })
-	  // .catch(function(err) {
-	  //   res.json(err);
-	  // });
-	  res.send("test response")
+  	db.Note.create(req.body.note)
+	  	.then(function(dbNote) {
+	    	db.User.findOneAndUpdate(
+	    		{
+	    			_id: req.params.id
+	    		}, 
+	    		{
+	    			notes: dbNote._id 
+	    		}, 
+	    		{ 
+	    			new: true 
+	    		});
+	  	}).then(function(response) {
+	  	console.log("db updated")
+	    res.json(response);
+	  })
+	  .catch(function(err) {
+	    res.json(err);
+	  });
 });
 
 

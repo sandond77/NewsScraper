@@ -48,9 +48,9 @@
 					    <div class="col s12">
 					      	<div class="comments">
 					        <ol class="list-group">
-{{!-- 					          	{{#each Message}}
+{{!-- 					          	{{#each results}}
 						            <div>
-							            <li><p>{{Message}}</p>
+							            <li><p>{{note}}</p>
 							            <p> This comment was created on {{createdAt}} </p>
 							            </li>
 						        	</div>
@@ -110,14 +110,15 @@
 					id: id
 				}
 			}).then(function(response){
-				console.log("comments found!", response);
+				console.log("console logging", response);
+				// window.location.reload();
 			});
 		})
 
 		$(".submit").click(function(event){
 			event.preventDefault();
+			$("#text").val("");
 			var send = {
-				id:$(this).attr("data-id"),
 				note:$("#text").val().trim()
 			}
 
@@ -126,9 +127,12 @@
 			$.ajax({
 				method: "POST",
 				url: "/api/" + id,
-				data: send
+				data: {
+					note: $("#text").val().trim()
+				}
 			}).then(function(response){
 				console.log("comment saved!");
+				// window.location.reload();
 			});
 		})
 	})
