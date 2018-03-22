@@ -111,6 +111,7 @@ router.get("/api/:id", function(req, res) {
     ).populate("note")
     	.then(function(results){
      		console.log("get request successful")
+     		res.send(results)
     	})	  	
     	.catch(function(err) {
 	    	res.json(err);
