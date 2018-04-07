@@ -21,3 +21,6 @@ If users see an article that they like, they can save that article to the websit
 
 Saved articles are retained on this page. Users are able to remove the saved article or they can leave comments on the articles for other people to read. 
 The comments are saved to the database and can be viewed by anyone.
+
+## Deployed Website
+Visit the deployed website here! https://radiant-plains-22268.herokuapp.com/
